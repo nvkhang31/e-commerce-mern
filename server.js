@@ -1,18 +1,30 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { connectToDatabase } from './src/config/connectionToDB.js';
+import cookieParser from 'cookie-parser';
+import authRoutes from './src/routes/authRoutes.js';
 
 // Load environment variables
 dotenv.config();
+console.log("JWT_SECRET:", process.env.JWT_SECRET);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
+// Middleware để parse JSON từ client
 app.use(express.json());
+
+// Middleware để parse dữ liệu form (x-www-form-urlencoded)
+app.use(express.urlencoded({ extended: true }));
+
+// Middleware để parse cookies
+app.use(cookieParser());
 
 // Connect to MongoDB
 connectToDatabase();
+
+// Routes
+app.use('/api/auth', authRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
@@ -21,5 +33,5 @@ app.get("/", (req, res) => {
 
 // Start Server
 app.listen(PORT, () => {
-  console.log(`Server is running at port:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
