@@ -6,7 +6,7 @@ import authRoutes from './src/routes/authRoutes.js';
 
 // Load environment variables
 dotenv.config();
-console.log("JWT_SECRET:", process.env.JWT_SECRET);
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
