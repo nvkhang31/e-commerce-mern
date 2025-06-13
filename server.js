@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { connectToDatabase } from './src/config/connectionToDB.js';
 import cookieParser from 'cookie-parser';
 import authRoutes from './src/routes/authRoutes.js';
+import userRoutes from './src/routes/userRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -25,6 +26,7 @@ connectToDatabase();
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
