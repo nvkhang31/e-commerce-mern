@@ -11,10 +11,15 @@ const userSchema = new mongoose.Schema(
       default: "customer",
     },
     address: { type: String },
-    phone: { type: String },
+    phone: { type: String },    
     isVerified: {
       type: Boolean,
       default: false,
+    },
+    status: {
+      type: String,
+      enum: ["active", "inactive"],
+      default: "active",
     },
     resetPasswordToken: String,
     resetPasswordExpiresAt: Date,
