@@ -4,6 +4,8 @@ import { connectToDatabase } from './src/config/connectionToDB.js';
 import cookieParser from 'cookie-parser';
 import authRoutes from './src/routes/authRoutes.js';
 import userRoutes from './src/routes/userRoutes.js';
+import categoryRoutes from './src/routes/categoryRoutes.js';
+
 
 // Load environment variables
 dotenv.config();
@@ -27,6 +29,7 @@ connectToDatabase();
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/category', categoryRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
