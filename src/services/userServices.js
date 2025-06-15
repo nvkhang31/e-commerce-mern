@@ -9,10 +9,10 @@ export const getProfile = async (userId) => {
 
 export const updateProfile = async (userId, updateData) => {
   // Không cho phép update email, role, password qua API này
-  const { name, phone, address } = updateData;
+  const { name, phone, address, avatar } = updateData;
   const user = await User.findByIdAndUpdate(
     userId,
-    { name, phone, address },
+    { name, phone, address, avatar },
     { new: true }
   );
   if (!user) throw new Error("User not found");

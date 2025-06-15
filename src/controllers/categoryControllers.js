@@ -8,10 +8,16 @@ import {
 
 export const createCategoryController = async (req, res) => {
   try {
-    const category = await createCategory(req.body);
+    let data = req.body;
+    if (req.files && req.files.length > 0) {
+      data.imageCategory = req.files.map(file => file.path);
+    }
+    const category = await createCategory(data);
     res.status(201).json({ success: true, category });
   } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
+     console.error("CATEGORY ERROR:", error, error.message, error.stack);
+    // Sửa lại dòng này:
+    res.status(400).json({ success: false, message: error.message || String(error) });
   }
 };
 
@@ -37,7 +43,11 @@ export const getCategoryByIdController = async (req, res) => {
 
 export const updateCategoryController = async (req, res) => {
   try {
-    const category = await updateCategory(req.params.id, req.body);
+    let data = req.body;
+    if (req.files && req.files.length > 0) {
+      data.imageCategory = req.files.map(file => file.path);
+    }
+    const category = await updateCategory(req.params.id, data);
     res.status(200).json({ success: true, category });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
