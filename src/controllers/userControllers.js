@@ -15,7 +15,11 @@ export const getProfileController = async (req, res) => {
 
 export const updateProfileController = async (req, res) => {
   try {
-    const user = await updateProfile(req.user._id, req.body);
+    let updateData = req.body;
+    if (req.file) {
+      updateData.avatar = req.file.path; // URL từ Cloudinary
+    }
+    const user = await updateProfile(req.user._id, updateData);
     res.status(200).json({ success: true, user: { ...user._doc, password: undefined } });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
