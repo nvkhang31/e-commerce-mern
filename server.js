@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import authRoutes from './src/routes/authRoutes.js';
 import userRoutes from './src/routes/userRoutes.js';
 import categoryRoutes from './src/routes/categoryRoutes.js';
+import productRoutes from './src/routes/productRoutes.js';
 
 
 // Load environment variables
@@ -30,6 +31,7 @@ connectToDatabase();
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/category', categoryRoutes);
+app.use('/api/product', productRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
