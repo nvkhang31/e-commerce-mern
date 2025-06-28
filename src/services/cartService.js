@@ -6,7 +6,7 @@ export const addToCart = async (userId, productId, quantity) => {
     cart = new Cart({ userId, items: [{ productId, quantity }] });
   } else {
     const itemIndex = cart.items.findIndex(
-      (item) => item.productId.toString() === productId
+      (item) => item.productId.toString() ===  productId
     );
     if (itemIndex > -1) {
       cart.items[itemIndex].quantity += quantity;
